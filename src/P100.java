@@ -24,6 +24,7 @@ public class P100 {
         }
     }
 
+    // I do not know why this method makes the solution false although it is specified in the question details.
     public static boolean isInRange(int i, int j) {
         return i > 0 && i < 10000 && j > 0 && j < 10000;
     }
