@@ -20,55 +20,77 @@ public class P103 {
             // sort boxes based on dimensions
             Arrays.sort(boxes, (a, b) -> {
                 for(int i=0; i<a.getDimensions().length; i++)
-                    for(int j=0; j<b.getDimensions().length; j++)
-                        if(a.getDimensions()[i] == b.getDimensions()[j])
+                    if(a.getDimensions()[i] == b.getDimensions()[i])
                             continue;
                         else
-                            return Integer.compare(a.getDimensions()[i], b.getDimensions()[j]);
+                            return Integer.compare(a.getDimensions()[i], b.getDimensions()[i]);
                 return 0;
             });
 
-//            for (Box box : boxes)
-//                System.out.println(box.toString());
+            for (Box box : boxes)
+                System.out.println(box.toString());
             printMaxNestedSeq(boxes);
         }
 
     }
 
     private static void printMaxNestedSeq(Box[] boxes){
-        ArrayList<ArrayList<Integer>> allSequences = new ArrayList<>();
-        ArrayList<Integer> currentSequence = new ArrayList<>();
-        int sequenceLength = 0;
-        int currentIndex;
-        for(int i=0; i<boxes.length; i++){
-            sequenceLength++;
-            currentSequence.add(boxes[i].getName());
-            currentIndex = i;
-            for(int j=currentIndex+1; j<boxes.length; j++){
-                if(isFitted(boxes[currentIndex].getDimensions(), boxes[j].getDimensions())){
-                    currentSequence.add(boxes[j].getName());
-                    sequenceLength++;
-                    currentIndex = j;
-                }
-            }
-            currentSequence.add(sequenceLength);
-            sequenceLength = 0;
-            ArrayList<Integer> currentSequenceCopy = new ArrayList<>(currentSequence);
-            allSequences.add(currentSequenceCopy);
-            currentSequence.clear();
-        }
 
-        ArrayList<Integer> maxSeq = new ArrayList<>();
-        int max = 0;
-        for (ArrayList<Integer> allSequence : allSequences) {
-            if (max < allSequence.get(allSequence.size() - 1)) {
-                max = allSequence.get(allSequence.size() - 1);
-                maxSeq = allSequence;
-            }
-        }
-        System.out.println(maxSeq.get(maxSeq.size()-1));
-        for(int i=0; i<maxSeq.size()-1; i++)
-            System.out.print(maxSeq.get(i)+" ");
+
+
+
+//        ArrayList<Integer> seqIndexes = new ArrayList<>();
+//        int maxSeq = 1;
+//        for(int i=0; i<boxes.length-1; i++){
+//            for(int j= i+1; j<boxes.length; j++){
+//                if(isFitted(boxes[i].getDimensions(), boxes[j].getDimensions())){
+//                    if(!(seqIndexes.contains(boxes[i].getName())
+//                            &&seqIndexes.contains(boxes[j].getName()))) {
+//                        seqIndexes.add(boxes[i].getName());
+//                        seqIndexes.add(boxes[j].getName());
+//                    }
+//                    maxSeq++;
+//                    i = j;
+//                    break;
+//                }
+//            }
+//        }
+//        System.out.println(seqIndexes.toString());
+//        System.out.println(maxSeq);
+
+//        ArrayList<ArrayList<Integer>> allSequences = new ArrayList<>();
+//        ArrayList<Integer> currentSequence = new ArrayList<>();
+//        int sequenceLength = 0;
+//        int currentIndex;
+//        for(int i=0; i<boxes.length; i++){
+//            sequenceLength++;
+//            currentSequence.add(boxes[i].getName());
+//            currentIndex = i;
+//            for(int j=currentIndex+1; j<boxes.length; j++){
+//                if(isFitted(boxes[currentIndex].getDimensions(), boxes[j].getDimensions())){
+//                    currentSequence.add(boxes[j].getName());
+//                    sequenceLength++;
+//                    currentIndex = j;
+//                }
+//            }
+//            currentSequence.add(sequenceLength);
+//            sequenceLength = 0;
+//            ArrayList<Integer> currentSequenceCopy = new ArrayList<>(currentSequence);
+//            allSequences.add(currentSequenceCopy);
+//            currentSequence.clear();
+//        }
+//
+//        ArrayList<Integer> maxSeq = new ArrayList<>();
+//        int max = 0;
+//        for (ArrayList<Integer> allSequence : allSequences) {
+//            if (max < allSequence.get(allSequence.size() - 1)) {
+//                max = allSequence.get(allSequence.size() - 1);
+//                maxSeq = allSequence;
+//            }
+//        }
+//        System.out.println(maxSeq.get(maxSeq.size()-1));
+//        for(int i=0; i<maxSeq.size()-1; i++)
+//            System.out.print(maxSeq.get(i)+" ");
     }
 
     private static boolean isFitted(int[] a, int[] b){
